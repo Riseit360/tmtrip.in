@@ -1,0 +1,25 @@
+{
+  "name": "tmtrip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Bijay",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "http": "^0.0.1-security",
+    "nodemon": "^3.1.11",
+    "path": "^0.12.7"
+  }
+}

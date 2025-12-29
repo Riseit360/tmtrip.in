@@ -1,0 +1,209 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/topservice.ejs') %>
+
+<div class="contactform-container">
+
+    <h2 class="contactform-title">Contact Us</h2>
+
+    <!-- Success Message -->
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="contact-success"><%= success %></div>
+    <% } %>
+
+    <!-- Error Message -->
+    <% if (typeof errors !== 'undefined' && Object.keys(errors).length > 0) { %>
+        <div class="contact-error">Please fix the errors below.</div>
+    <% } %>
+
+    <form class="contactform" method="POST" action="/contactus" id="contactForm" novalidate>
+
+        <!-- Name -->
+        <div class="contactgroup">
+            <label class="contactlabel">Name <span class="required">*</span></label>
+            <input 
+                type="text" 
+                name="name" 
+                class="contactinput contactname <%= errors && errors.name ? 'contact-invalid' : '' %>"
+                placeholder="Your Name"
+                value="<%= old && old.name ? old.name : '' %>"
+                required
+            >
+            <% if (errors && errors.name) { %>
+                <p class="contact-invalid-msg"><%= errors.name.msg %></p>
+            <% } %>
+        </div>
+
+        <!-- Email -->
+        <div class="contactgroup">
+            <label class="contactlabel">Email <span class="required">*</span></label>
+            <input 
+                type="email" 
+                name="email" 
+                class="contactinput contactemail <%= errors && errors.email ? 'contact-invalid' : '' %>"
+                placeholder="your@email.com"
+                value="<%= old && old.email ? old.email : '' %>"
+                required
+            >
+            <% if (errors && errors.email) { %>
+                <p class="contact-invalid-msg"><%= errors.email.msg %></p>
+            <% } %>
+        </div>
+
+        <!-- Phone -->
+        <div class="contactgroup">
+            <label class="contactlabel">Phone Number <span class="required">*</span></label>
+            <input 
+                type="text" 
+                name="phone" 
+                class="contactinput contactphone <%= errors && errors.phone ? 'contact-invalid' : '' %>"
+                placeholder="9876543210"
+                value="<%= old && old.phone ? old.phone : '' %>"
+                required
+            >
+            <% if (errors && errors.phone) { %>
+                <p class="contact-invalid-msg"><%= errors.phone.msg %></p>
+            <% } %>
+        </div>
+
+        <!-- Message -->
+        <div class="contactgroup">
+            <label class="contactlabel">Message (optional)</label>
+            <textarea 
+                name="message" 
+                class="contacttextarea contactmessage <%= errors && errors.message ? 'contact-invalid' : '' %>"
+                placeholder="Write your message..."
+            ><%= old && old.message ? old.message : '' %></textarea>
+            <% if (errors && errors.message) { %>
+                <p class="contact-invalid-msg"><%= errors.message.msg %></p>
+            <% } %>
+        </div>
+
+        <button type="submit" class="contactbtn">Submit</button>
+
+    </form>
+</div>
+
+<script>
+(function () {
+  const form = document.getElementById('contactForm');
+  const nameEl = form.querySelector('.contactname');
+  const emailEl = form.querySelector('.contactemail');
+  const phoneEl = form.querySelector('.contactphone');
+  const messageEl = form.querySelector('.contactmessage');
+
+  // Regex rules
+  const nameRe = /^[A-Za-z ]{2,100}$/; // only letters and spaces, 2-100 chars
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // simple, practical email check
+  const phoneRe = /^(?:\+91|0)?[6-9]\d{9}$/; // Indian numbers: optional +91 or 0, then 10 digits starting 6-9
+
+  // Utility: show inline error (creates <p> if not present)
+  function showError(input, msg) {
+    input.classList.add('contact-invalid');
+    let hint = input.parentElement.querySelector('.contact-invalid-msg');
+    if (!hint) {
+      hint = document.createElement('p');
+      hint.className = 'contact-invalid-msg';
+      input.parentElement.appendChild(hint);
+    }
+    hint.textContent = msg;
+  }
+
+  function clearError(input) {
+    input.classList.remove('contact-invalid');
+    const hint = input.parentElement.querySelector('.contact-invalid-msg');
+    if (hint) hint.textContent = '';
+  }
+
+  // Field validators
+  function validateName() {
+    const v = (nameEl.value || '').trim();
+    if (!v) {
+      showError(nameEl, 'Name is required.');
+      return false;
+    }
+    if (!nameRe.test(v)) {
+      showError(nameEl, 'Name must contain only letters and spaces (2-100 characters).');
+      return false;
+    }
+    clearError(nameEl);
+    return true;
+  }
+
+  function validateEmail() {
+    const v = (emailEl.value || '').trim();
+    if (!v) {
+      showError(emailEl, 'Email is required.');
+      return false;
+    }
+    if (!emailRe.test(v)) {
+      showError(emailEl, 'Please enter a valid email address.');
+      return false;
+    }
+    clearError(emailEl);
+    return true;
+  }
+
+  function validatePhone() {
+    const v = (phoneEl.value || '').trim();
+    if (!v) {
+      showError(phoneEl, 'Phone number is required.');
+      return false;
+    }
+    if (!phoneRe.test(v)) {
+      showError(phoneEl, 'Enter a valid Indian phone number (10 digits, starts with 6-9; +91 or 0 optional).');
+      return false;
+    }
+    clearError(phoneEl);
+    return true;
+  }
+
+  function validateMessage() {
+    const v = (messageEl.value || '').trim();
+    if (v.length > 1000) {
+      showError(messageEl, 'Message too long (max 1000 characters).');
+      return false;
+    }
+    clearError(messageEl);
+    return true;
+  }
+
+  // Realtime validation (clears as user types)
+  nameEl.addEventListener('input', validateName);
+  emailEl.addEventListener('input', validateEmail);
+  phoneEl.addEventListener('input', validatePhone);
+  messageEl.addEventListener('input', validateMessage);
+
+  // Block submit if invalid
+  form.addEventListener('submit', function (e) {
+    // run validators
+    const okName = validateName();
+    const okEmail = validateEmail();
+    const okPhone = validatePhone();
+    const okMessage = validateMessage();
+
+    const isValid = okName && okEmail && okPhone && okMessage;
+
+    if (!isValid) {
+      e.preventDefault();
+      // focus first invalid
+      const firstInvalid = form.querySelector('.contact-invalid');
+      if (firstInvalid) {
+        firstInvalid.focus();
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    // else allow submit (server-side validation must still run)
+  });
+
+  // Trim whitespace on blur to sanitize values before submit
+  [nameEl, emailEl, phoneEl, messageEl].forEach(el => {
+    el.addEventListener('blur', () => {
+      el.value = (el.value || '').trim();
+    });
+  });
+
+})();
+</script>
+
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,206 @@
+
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/topservice.ejs') %>
+
+<div>
+      <!--Search Cheap Flights-->
+    <div class="flightsearchsec comonmarpad">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Search Cheap Flights</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flightsect-form">
+
+                        <div class="tab-container">
+                            <div class="tab-menu">
+                                <ul>
+                                    <li><a href="#Roundtrip" class="taclarsec active" data-id="roundtrip">Roundtrip</a>
+                                    </li>
+                                    <li><a href="#one-way" class="taclarsec" data-id="one-way">One-way</a></li>
+                                    <li><a href="#multi-city" class="taclarsec" data-id="multi-city">Multi-city</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Tab-menu Roundtrip -->
+                            <div class="shomabodi active" data-id="roundtrip">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" id="fromInput" class="form-control"
+                                                    placeholder="Leaving from">
+                                            </div>
+                                            <span class="flexpoabsbor" id="swapBtn">
+                                                <i class="fa-solid fa-right-left"></i>
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" id="toInput" class="form-control"
+                                                    placeholder="Going to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Tab-menu One-way -->
+                            <div class="shomabodi " data-id="one-way">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Leaving from">
+                                            </div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Going to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Tab menu Multi-city -->
+                            <div class="shomabodi " data-id="multi-city">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Leaving from">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Going to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Services-->
+    <div class="services comonmarpad">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="services-box">
+                        <div class="txtare">
+                            <span><img src="/images/plan_flight.png" alt="Holiday Packages icon"></span>
+                            <h3>Book a Flight</h3>
+                        </div>
+                        <p>Book. Fly Smarter. Fly with TMTrip and Smile. Your Premium Path to the World — TMTrip
+                            Flights.</p>
+                        <a href="/flights">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="services-box">
+                        <div class="txtare">
+                            <span><img src="/images/Travel-Loan.png" alt="Travel Loan icon"></span>
+                            <h3>Travel Loan</h3>
+                        </div>
+                        <p>Travel credit line up to ₹5 lac makes international/expensive travel more accessible for
+                            middle-income.</p>
+                        <a href="/travelloan">Apply Now</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="services-box">
+                        <div class="txtare">
+                            <span><img src="/images/Forex-Card.png" alt="Forex Card icon"></span>
+                            <h3>Forex Card</h3>
+                        </div>
+                        <p>“Multi-Currency Freedom. Minimal Forex Fees. Travel Global. Spend Local — At Lowest Cost.</p>
+                        <a href="/forex">Get One Now</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="services-box">
+                        <div class="txtare">
+                            <span><img src="/images/Holiday-Packages.png" alt="Holiday Packages icon"></span>
+                            <h3>Holiday Packages</h3>
+                        </div>
+                        <p>Because your dreams deserve a passport too. Let your family see the world you always dreamed
+                            of.</p>
+                        <a href="/holidaypackages">Design Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<%- include('../partials/footer.ejs') %>
