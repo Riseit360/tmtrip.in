@@ -18,7 +18,7 @@ class flightAPIDta {
             Password: EMT.Password,
             PortalID: 1,
             UserType: 0,
-            IpAddress: req.ip || "127.0.0.1"
+            IpAddress: req.ip || "10.10.10.10"
         };
     }
 
@@ -30,16 +30,24 @@ class flightAPIDta {
             // 1️. Input data from request body
             const input = req.body;
 
+            const FlightSearchDetails = {
+                BeginDate: input.date || "2026-02-15",
+                Origin: input.From || "DEL",
+                Destination: input.To || "BOM"
+            };
+
+
+
             // 2️. Create UpdateIssueData exactly as EMT API expects
-           const UpdateIssueData = {
+            const UpdateIssueData = {
                 Adults: input.Adults || 1,
-                Childs: input.Childs || 0,
-                Infants: input.Infants || 0,
-                Cabin: input.Cabin || 0,
-                TripType: input.TripType || 0,
-                TraceId: input.TraceId,
                 Authentication: this.getEMTAuthentication(req),
-                FlightSearchDetails: input.FlightSearchDetails
+                Cabin: input.Cabin || 0,
+                Childs: input.Childs || 1,
+                FlightSearchDetails: [FlightSearchDetails],
+                Infants: input.Infants || 1,
+                TraceId: input.TraceId || "EMTB2B73fd0ca9fcf4436cbe8b59fded57e616",
+                TripType: input.TripType || 0,
             };
 
             // 3️. API URL
@@ -50,7 +58,9 @@ class flightAPIDta {
                 headers: {
                     "Content-Type": "application/json"
                 }
-            });
+            }); 
+            console.log('response: ', response);
+
 
             // 5️. Success response
             return ({ status: "success", data: response.data });
