@@ -29,14 +29,11 @@ class flightAPIDta {
 
             // 1️. Input data from request body
             const input = req.body;
-
             const FlightSearchDetails = {
                 BeginDate: input.date || "2026-02-15",
                 Origin: input.From || "DEL",
                 Destination: input.To || "BOM"
             };
-
-
 
             // 2️. Create UpdateIssueData exactly as EMT API expects
             const UpdateIssueData = {
@@ -49,6 +46,7 @@ class flightAPIDta {
                 TraceId: input.TraceId || "EMTB2B73fd0ca9fcf4436cbe8b59fded57e616",
                 TripType: input.TripType || 0,
             };
+            console.log('UpdateIssueData: ', UpdateIssueData);
 
             // 3️. API URL
             const fullURL = `${EMT.base_url}/FlightSearch`;
@@ -58,7 +56,7 @@ class flightAPIDta {
                 headers: {
                     "Content-Type": "application/json"
                 }
-            }); 
+            });
             console.log('response: ', response);
 
 
