@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(
     session({
         secret: process.env.SESSION_SECRET || "supersecretbijaykey123",
-        resave: false, 
+        resave: false,
         saveUninitialized: false,
         cookie: {
             httpOnly: true,          // Protects from JS access
@@ -39,20 +39,23 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ensure templates always have these keys
 app.use((req, res, next) => {
-  res.locals.errors = {};
-  res.locals.old = {};
-  res.locals.success = null;
-  next();
+    res.locals.errors = {};
+    res.locals.old = {};
+    res.locals.success = null;
+    next();
 });
 
 
 // Routes
 app.use('/', require('./routes/mainRoutes'));
+app.use('/', require('./routes/FlightRoutes'));
+
 
 // 404
 app.use((req, res) => {
     res.status(404).render("pages/404error");
 });
+
 
 // Start Server
 http.createServer(app).listen(port, () => {

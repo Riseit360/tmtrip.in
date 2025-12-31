@@ -1,7 +1,14 @@
 {
     "EMT": {
-        "username": "EMTB2BM",
-        "Password": "EMT@uytrFYTREt",
-        "base_url": "http://stagingapi.easemytrip.com"
+        "Flight": {
+            "username": "EMTB2BM",
+            "Password": "EMT@uytrFYTREt",
+            "base_url": "http://stagingapi.easemytrip.com/Flight.svc/json"
+        },
+        "Hotel": {
+            "username": "HotelAPIUserTest",
+            "Password": " BDvRwrEwX5waYF6NKHbRNN4pSD9G2H",
+            "base_url": "http://hotelapita.easemytrip.com/MiHotel.svc"
+        }
     }
 }
