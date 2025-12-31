@@ -12,7 +12,7 @@ const flightData = new flightAPIDta();
 
 
 // Flight Routes
-router.get('/flight-search', (req, res) => {
+router.get('/flight-search', flightData.flightsearch, (req, res) => {
     try {
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {

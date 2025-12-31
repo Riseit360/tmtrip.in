@@ -9,6 +9,17 @@ const axios = require("axios");
 // File and Functions
 class flightAPIDta {
 
+
+    // Flight Search Function
+    async flightsearch(req, res) {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
+
 }
 
 
