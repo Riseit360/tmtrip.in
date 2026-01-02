@@ -31,14 +31,11 @@ router.post('/flight-search', async (req, res) => {
     }
 })
 
-
-
 // Flight Pages
 router.get('/flight-search/listing', async (req, res) => {
     try {
         // Call flight search service
-        const flightSearchResult = await flightData.flightsearch(req, res);
-        console.log('flightSearchResult: ', flightSearchResult);
+        const flightSearchResult = await flightData.flightsearch(req, res); 
 
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
