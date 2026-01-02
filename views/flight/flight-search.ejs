@@ -1,0 +1,70 @@
+<% if (data && data.status === 'success' && data.flights.length > 0) { %>
+
+  <% data.flights.forEach(function(flight){ 
+      
+
+      const leg = flight.Bonds?.[0]?.Legs?.[0];
+
+      const airlineName = leg?.AirlineName || "Airline";
+      const airlineCode = leg?.AirlineCode || "";
+      const flightNo = leg?.FlightNumber || "";
+
+
+      const departTime = leg?.DepTime || "--:--";
+      const arriveTime = leg?.ArrTime || "--:--";
+
+
+      const duration = leg?.Duration || "Nonstop";
+
+
+      const fromCity = leg?.Origin || "DEL";
+      const toCity = leg?.Destination || "BOM";
+
+   
+      const price = flight.Fare?.PublishedFare || 0;
+  %>
+
+  <!-- FLIGHT CARD -->
+  <div class="flight-card">
+    
+    <!-- LEFT: Airline -->
+    <div class="airline">
+      <img src="/images/airlines/<%= airlineCode %>.png" alt="<%= airlineName %>" />
+      <div>
+        <strong><%= airlineName %></strong>
+        <div class="flight-no"><%= airlineCode %>-<%= flightNo %></div>
+      </div>
+    </div>
+
+    <!-- MIDDLE: TIME -->
+    <div class="timing">
+      <div>
+        <strong><%= departTime %></strong>
+        <small><%= fromCity %></small>
+      </div>
+
+      <div class="duration">
+        <small><%= duration %></small>
+        <span>Non-stop</span>
+      </div>
+
+      <div>
+        <strong><%= arriveTime %></strong>
+        <small><%= toCity %></small>
+      </div>
+    </div>
+
+    <!-- RIGHT: PRICE -->
+    <div class="price">
+      <div class="amount">₹ <%= price %></div>
+      <button class="book-btn">BOOK NOW</button>
+      <small class="seats">Limited seats</small>
+    </div>
+
+  </div>
+
+  <% }) %>
+
+<% } else { %>
+  <p>No flights found</p>
+<% } %>

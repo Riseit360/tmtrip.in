@@ -12,27 +12,38 @@ const flightData = new flightAPIDta();
 
 
 // Flight Routes
-router.get('/flight-search/list',  async(req, res)=>{
+router.post('/flight-search', async (req, res) => {
     try {
+        // Call flight search service
         const flightSearchResult = await flightData.flightsearch(req, res);
-        console.log('flightSearchResult: ', flightSearchResult);
 
+        // Safety check
+        if (!flightSearchResult || flightSearchResult.status !== 'success') {
+            return res.status(400).json({ status: 'error', message: 'Flight search failed' });
+        }
 
-
+        // Redirect with required query params
+        return res.redirect(`/flight-search/listing?${flightSearchResult.queryString}`);
 
     } catch (error) {
-        
+        console.error('Flight Search Error:', error);
+        return res.status(500).json({ status: 'error', message: 'Server error' });
     }
 })
 
 
 
 // Flight Pages
-router.get('/flight-search',  async (req, res) => {
+router.get('/flight-search/listing', async (req, res) => {
     try {
+        // Call flight search service
+        const flightSearchResult = await flightData.flightsearch(req, res);
+        console.log('flightSearchResult: ', flightSearchResult);
+
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
-            title: "Dashboard"
+            title: "Dashboard",
+            data: flightSearchResult
         });
     } catch (error) {
 

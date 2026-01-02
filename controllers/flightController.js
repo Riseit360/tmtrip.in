@@ -8,8 +8,9 @@ const config = require("../config/config.json");
 // EMT Flight API config
 const EMT = config.EMT.Flight;
 
-class flightAPIDta {
 
+
+class flightAPIDta {
 
     // Get EMT Authentication Details
     getEMTAuthentication(req) {
@@ -22,50 +23,95 @@ class flightAPIDta {
         };
     }
 
-
     // Flight Search Function
     async flightsearch(req, res) {
         try {
 
-            // 1️. Input data from request body
-            const input = req.body;
+            // 0. Input data from request body
+            let input = {};
+
+            // 1. Decide source: BODY or QUERY            
+            if (req.body && Object.keys(req.body).length > 0) {
+                input = req.body;
+            } else if (req.query && Object.keys(req.query).length > 0) {
+                // srch = DEL|BOM|2026-02-15
+                const { srch, px, cbn } = req.query;
+                if (!srch || !px) {
+                    return { status: "error", message: "Invalid search parameters" };
+                }
+                const [From, To, date] = srch.split('|');
+                const [Adults, Childs, Infants] = px.split('-').map(Number);
+                input = { From, To, date, Adults, Childs, Infants, Cabin: Number(cbn || 0), TripType: 0 };
+            }
+
+            // 2. Validation 
+            if (!input.From || !input.To || !input.date) {
+                return ({ status: "error", message: "From, To and date are required" });
+            }
+
+            // 3. Flight Search Details
             const FlightSearchDetails = {
-                BeginDate: input.date || "2026-02-15",
-                Origin: input.From || "DEL",
-                Destination: input.To || "BOM"
+                BeginDate: input.date,
+                Origin: input.From,
+                Destination: input.To
             };
 
-            // 2️. Create UpdateIssueData exactly as EMT API expects
+            // 4. EMT Payload
             const UpdateIssueData = {
-                Adults: input.Adults || 1,
+                Adults: input.Adults ?? 1,
+                Childs: input.Childs ?? 0,
+                Infants: input.Infants ?? 0,
+                Cabin: input.Cabin ?? 0,
+                TripType: input.TripType ?? 0,
+                TraceId: input.TraceId || "EMT_TEST_TRACE",
                 Authentication: this.getEMTAuthentication(req),
-                Cabin: input.Cabin || 0,
-                Childs: input.Childs || 1,
-                FlightSearchDetails: [FlightSearchDetails],
-                Infants: input.Infants || 1,
-                TraceId: input.TraceId || "EMTB2B73fd0ca9fcf4436cbe8b59fded57e616",
-                TripType: input.TripType || 0,
+                FlightSearchDetails: [FlightSearchDetails]
             };
-            console.log('UpdateIssueData: ', UpdateIssueData);
 
-            // 3️. API URL
+            // 5. EMT API Call
             const fullURL = `${EMT.base_url}/FlightSearch`;
-
-            // 4️. API Call
             const response = await axios.post(fullURL, UpdateIssueData, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
-            console.log('response: ', response);
+
+            // API Response
+            const apiData = response.data;
+
+            // 6. EMT Response Validation
+            if (apiData.Errors) {
+                return ({ status: "error", message: "EMT API Error", errors: apiData.Errors });
+            }
+
+            // Check journeys
+            if (!apiData.Journeys || apiData.Journeys.length === 0) {
+                return ({ status: "error", message: "No flights found" });
+            }
+
+            // 7. Extract flights
+            const journeys = apiData.Journeys;
+            const firstJourney = journeys[0];
+            const segments = firstJourney.Segments || [];
 
 
-            // 5️. Success response
-            return ({ status: "success", data: response.data });
+            // 8. BUILD RENDER / REDIRECT PARAMETERS
+            const px = `${input.Adults ?? 1}-${input.Childs ?? 0}-${input.Infants ?? 0}`;
+            const srch = `${input.From}|${input.To}|${input.date}`;
+
+            const searchParams = {
+                srch, px, cbn: input.Cabin ?? 0, isow: true, isdm: true, lang: "en-us",
+                IsDoubleSeat: false, CCODE: "IN", curr: "INR", apptype: "B2C"
+            };
+            const queryString = new URLSearchParams(searchParams).toString();
+
+            // Successful respons
+            return ({ status: "success", flights: segments, queryString });
 
         } catch (error) {
+            console.log('error: ', error);
             // ❌ Error handling
-            return ({ status: "error", message: error.response?.data || error.message });
+            return ({ status: "error", message: error });
         }
     }
 
