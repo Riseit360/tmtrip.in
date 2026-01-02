@@ -1,6 +1,8 @@
 // Express Route module import
 const ejs = require("ejs");
 const nodemailer = require("nodemailer");
+
+// Config import
 const config = require("../../config/config.json");
 
 // Mail transporter setup
@@ -19,14 +21,14 @@ const transporter = nodemailer.createTransport({
 
 class EmailSent {
     // 1️⃣ Send email to Admin
-    async sendemailtous(formData) {
+    async sendemailtous(formData) { 
         try {
             const html = await ejs.renderFile("./views/email/thanks_me.ejs", { data: formData });
             const mailOptions = {
                 from: `"${config.Gamil.Email_Title}" <${config.Gamil.EmailFrom}>`,
                 to: config.Gamil.EmailFrom,
                 bcc: config.Gamil.Email_BCC,
-                subject: "Someone is trying to connect with us | CredManager",
+                subject: "Someone is trying to connect with us | TMTrip",
                 html
             };
 
@@ -51,7 +53,7 @@ class EmailSent {
                 from: `"${config.Gamil.Email_Title}" <${config.Gamil.EmailFrom}>`,
                 to: formData.email,
                 bcc: config.Gamil.Email_BCC,
-                subject: "Thanks for reaching CredManager",
+                subject: "Thanks for reaching TMTrip",
                 html
             };
 

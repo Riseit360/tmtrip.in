@@ -1,10 +1,18 @@
+// Npm Modules
 const mongoose = require('mongoose');
+
+// Config import
 const config = require('./config.json');
 
+// Mongoose Setup
 mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', false);
 
+
+
 class Connection {
+
+    // Singleton pattern
     constructor() {
         this.connectionEstablished = false;
     }
@@ -16,18 +24,22 @@ class Connection {
         }
 
         try {
-            const host = process.env.HOST || 'localhost';
+            // Determine host environment
+            const host = os.hostname();
             const isDevelopmentHost = config.SECRET.hosts.includes(host);
 
+            // Choose DB URI based on environment
             const dbURI = isDevelopmentHost ?
                 config.MongoDB.Production.UrlLink :
                 config.MongoDB.Development.UrlLink;
+            console.log('dbURI: ', dbURI);
 
-            await mongoose.connect(dbURI); // Clean, no deprecated options
+
+            // Clean, no deprecated options
+            await mongoose.connect(dbURI);
 
             this.connectionEstablished = true;
             console.log("MongoDB connected successfully.");
-            
         } catch (error) {
             console.error("❌ MongoDB connection error:", error.message);
             throw error; // Let app.js handle this
