@@ -4,6 +4,8 @@ const axios = require("axios");
 
 // Config import
 const config = require("../config/config.json");
+const Quote = require("../module/quoteModel");
+
 
 // EMT Flight API config
 const EMT = config.EMT.Flight;
@@ -114,6 +116,63 @@ class flightAPIDta {
             return ({ status: "error", message: error });
         }
     }
+
+    // Form Data Function
+    async getAQuate(req, res) {
+        try {
+            // 1. Get form data
+            const formData = req.body;
+
+            // 2. Basic validation (extra safety)
+            if (!formData.destination || !formData.departure_city || !formData.full_name || !formData.phone || !formData.email || formData.agree_terms !== "yes") {
+                return ({ status: "error", message: "All fields are required" });
+            }
+
+            // Booking object
+            const bookingData = {
+                destination: formData.destination,
+                departure_city: formData.departure_city
+            };
+
+            // 1️. Check if user already exists
+            const existingUser = await Quote.findOne({
+                "personal_details.email": formData.email,
+                "personal_details.phone": formData.phone
+            });
+
+            // 2️. If user exists → push booking
+            if (existingUser) {
+                // save data
+                existingUser.bookings.push(bookingData);
+                await existingUser.save();
+
+                // Return success
+                return ({ status: "success", message: "Booking added to existing user" });
+            }
+
+            // 3️. If new user → create document
+            const newQuote = new Quote({
+                personal_details: {
+                    full_name: formData.full_name,
+                    phone: formData.phone,
+                    email: formData.email
+                },
+                bookings: [bookingData],
+                agree_terms: formData.agree_terms === "yes"
+            });
+
+            // Save new user
+            await newQuote.save();
+
+            // Return success
+            return ({ status: "success", message: "New user & booking created" });
+
+        } catch (error) {
+            console.error("Quote Save Error:", error);
+            return ({ status: "error", message: "Server Error" });
+        }
+    }
+
 
 
 

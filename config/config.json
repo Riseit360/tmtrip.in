@@ -22,5 +22,20 @@
             "Password": " BDvRwrEwX5waYF6NKHbRNN4pSD9G2H",
             "base_url": "http://hotelapita.easemytrip.com/MiHotel.svc"
         }
+    },
+    "MongoDB": {
+        "Production": {
+            "UrlLink": "mongodb+srv://taxmanagerit:YcqxjZzuE6C1372e@tmtrip.sxma6xr.mongodb.net/TMTRIP-Data",
+            "atlas_password": "YcqxjZzuE6C1372e",
+            "atlas_user": "taxmanagerit"
+        },
+        "local": {
+            "localDatabaseUrl": "mongodb://0.0.0.0:27017/API"
+        },
+        "Development": {
+            "UrlLink": "mongodb+srv://taxmanagerbittu:NwIRZeKlPx3keeOH@tmtrip.c8qchjy.mongodb.net/TMTRIP-Data",
+            "atlas_password": "NwIRZeKlPx3keeOH",
+            "atlas_user": "taxmanagerbittu"
+        }
     }
 }

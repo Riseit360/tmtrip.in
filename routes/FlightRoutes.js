@@ -27,7 +27,7 @@ router.post('/flight-search', async (req, res) => {
 
     } catch (error) {
         console.error('Flight Search Error:', error);
-        return res.status(500).json({ status: 'error', message: 'Server error' });
+        res.status(404).render("pages/404error");
     }
 })
 
@@ -35,7 +35,7 @@ router.post('/flight-search', async (req, res) => {
 router.get('/flight-search/listing', async (req, res) => {
     try {
         // Call flight search service
-        const flightSearchResult = await flightData.flightsearch(req, res); 
+        const flightSearchResult = await flightData.flightsearch(req, res);
 
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
@@ -43,9 +43,24 @@ router.get('/flight-search/listing', async (req, res) => {
             data: flightSearchResult
         });
     } catch (error) {
-
+        console.error('Flight Search Error:', error);
+        res.status(404).render("pages/404error");
     }
 })
+
+// From Data 
+router.post('/get-a-quate', async (req, res) => {
+    try {
+        // Call flight search service
+        const getAQuateResult = await flightData.getAQuate(req, res);
+        console.log('getAQuateResult: ', getAQuateResult);
+
+
+    } catch (error) {
+        console.error('Get a quate Error:', error);
+        res.status(404).render("pages/404error");
+    }
+});
 
 
 

@@ -7,16 +7,17 @@ const path = require('path');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+// Database Connection Middleware 
+const dbConnection = require('./config/connection');
 
 // App Initialization
-
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
 
 // Global Middlewares
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -29,9 +30,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            httpOnly: true,            
-            maxAge: 1000 * 60 * 60,  
-            secure: false, 
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60,
+            secure: false,
             sameSite: "lax"
         }
     })
@@ -77,10 +78,14 @@ app.use((req, res) => {
     res.status(404).render("pages/404error");
 });
 
-
-// Server Start
-const server = http.createServer(app);
-server.listen(port, () => { 
-    console.log(`🚀 Server running on port ${port}`);
-    console.log(`🌐 http://localhost:${port}`); 
+dbConnection.connect().then(() => {
+    // Server Start
+    const server = http.createServer(app);
+    server.listen(port, () => {
+        console.log(`🚀 Server running on port ${port}`);
+        console.log(`🌐 http://localhost:${port}`);
+    });
+}).catch((err) => {
+    console.error("❌ Failed to start server. DB connection error:", err);
+    process.exit(1); // Exit if DB didn't connect
 });
