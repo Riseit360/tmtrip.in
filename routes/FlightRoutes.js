@@ -53,8 +53,19 @@ router.post('/get-a-quate', async (req, res) => {
     try {
         // Call flight search service
         const getAQuateResult = await flightData.getAQuate(req, res);
-        console.log('getAQuateResult: ', getAQuateResult);
+        const profileData = getAQuateResult.data.personal_details;
+        console.log('profileData: ', profileData);
 
+        // Safety check
+        if (!getAQuateResult || getAQuateResult.status !== 'success') {
+            return res.status(400).json({ status: 'error', message: 'Unable to submit quote' });
+        }
+
+        // Pages Direcdtory
+        return res.status(200).render("email/thanks_me.ejs", {
+          title: "Thank You",
+            data: profileData
+        });
 
     } catch (error) {
         console.error('Get a quate Error:', error);

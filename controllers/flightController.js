@@ -5,10 +5,12 @@ const axios = require("axios");
 // Config import
 const config = require("../config/config.json");
 const Quote = require("../module/quoteModel");
+const emailcontroller = require('./mail/emailsendcontroller')
 
 
 // EMT Flight API config
 const EMT = config.EMT.Flight;
+const sendemail = new emailcontroller();
 
 
 
@@ -140,6 +142,11 @@ class flightAPIDta {
                 "personal_details.phone": formData.phone
             });
 
+            // Mailer Data Save
+            const emailResult = await sendemail.sendemailfromcontactus(formData);
+            console.log('sendemail: ', emailResult);
+
+
             // 2️. If user exists → push booking
             if (existingUser) {
                 // save data
@@ -147,7 +154,7 @@ class flightAPIDta {
                 await existingUser.save();
 
                 // Return success
-                return ({ status: "success", message: "Booking added to existing user" });
+                return ({ status: "success", message: "Booking added to existing user", data: existingUser });
             }
 
             // 3️. If new user → create document
@@ -165,7 +172,7 @@ class flightAPIDta {
             await newQuote.save();
 
             // Return success
-            return ({ status: "success", message: "New user & booking created" });
+            return ({ status: "success", message: "New user & booking created", data: formData });
 
         } catch (error) {
             console.error("Quote Save Error:", error);
