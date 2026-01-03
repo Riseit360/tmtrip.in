@@ -28,7 +28,7 @@ class flightAPIDta {
     }
 
     // Flight Search Function
-    async flightsearch(req, res) {
+    async flightsearch(req) {
         try {
 
             // 0. Input data from request body
@@ -61,7 +61,7 @@ class flightAPIDta {
             };
 
             // 4. EMT Payload
-            const UpdateIssueData = {
+            const payload = {
                 Adults: input.Adults ?? 1,
                 Childs: input.Childs ?? 0,
                 Infants: input.Infants ?? 0,
@@ -74,7 +74,7 @@ class flightAPIDta {
 
             // 5. EMT API Call
             const fullURL = `${EMT.base_url}/FlightSearch`;
-            const response = await axios.post(fullURL, UpdateIssueData, {
+            const response = await axios.post(fullURL, payload, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -97,6 +97,7 @@ class flightAPIDta {
             const journeys = apiData.Journeys;
             const firstJourney = journeys[0];
             const segments = firstJourney.Segments || [];
+            const TraceId = response.data.TraceId;
 
 
             // 8. BUILD RENDER / REDIRECT PARAMETERS
@@ -110,7 +111,7 @@ class flightAPIDta {
             const queryString = new URLSearchParams(searchParams).toString();
 
             // Successful respons
-            return ({ status: "success", flights: segments, queryString });
+            return ({ status: "success", flights: segments, TraceId, queryString });
 
         } catch (error) {
             console.log('error: ', error);
@@ -118,6 +119,120 @@ class flightAPIDta {
             return ({ status: "error", message: error });
         }
     }
+    // Fare Rule Function
+    async fareRule(req) {
+        try {
+            // Extract required data
+            const { TraceId, ResultIndex } = req.body;
+
+            // Prepare payload
+            const payload = {
+                TraceId,
+                ResultIndex,
+                Authentication: this.getEMTAuthentication(req)
+            };
+
+            // API Call
+            const response = await axios.post(`${EMT.base_url}/FareRule`, payload, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            // Return fare rules
+            return { status: "success", fareRule: response.data.FareRules };
+
+        } catch (err) {
+            return { status: "error", message: err.message };
+        }
+    }
+
+    // RePrice Function
+    async rePrice(req) {
+        try {
+            // Extract required data
+            const { TraceId, ResultIndex } = req.body;
+
+            // Prepare payload
+            const payload = {
+                TraceId,
+                ResultIndex,
+                Authentication: this.getEMTAuthentication(req)
+            };
+
+            // API Call
+            const response = await axios.post(`${EMT.base_url}/RePrice`, payload, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            // Return fare
+            return { status: "success", fare: response.data.Fare };
+
+        } catch (err) {
+            return { status: "error", message: err.message };
+        }
+    }
+
+    // Book Flight Function
+    async bookFlight(req) {
+        try {
+            // Extract required data
+            const { TraceId, ResultIndex, Passengers } = req.body;
+
+            // Prepare payload
+            const payload = {
+                TraceId,
+                ResultIndex,
+                Passengers,
+                Authentication: this.getEMTAuthentication(req)
+            };
+
+            // API Call
+            const response = await axios.post(`${EMT.base_url}/Book`, payload, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            // Return booking details
+            return { status: "success", bookingId: response.data.BookingId, pnr: response.data.PNR };
+
+        } catch (err) {
+            return { status: "error", message: err.message };
+        }
+    }
+
+    // Ticket Issue Function
+    async ticketIssue(req) {
+        try {
+            // Extract required data
+            const { BookingId } = req.body;
+
+            // Prepare payload
+            const payload = {
+                BookingId,
+                Authentication: this.getEMTAuthentication(req)
+            };
+
+            // API Call
+            const response = await axios.post(`${EMT.base_url}/Ticket`, payload, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            // Return ticket details
+            return { status: "success", ticket: response.data };
+
+        } catch (err) {
+            return { status: "error", message: err.message };
+        }
+    }
+
+
+
 
     // Form Data Function
     async getAQuate(req, res) {
@@ -179,14 +294,6 @@ class flightAPIDta {
             return ({ status: "error", message: "Server Error" });
         }
     }
-
-
-
-
-
-
-
-
 
 }
 

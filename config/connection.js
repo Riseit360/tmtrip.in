@@ -25,7 +25,7 @@ class Connection {
 
         try {
             // Determine host environment
-            const host = require('os').hostname(); 
+            const host = require('os').hostname();  
             const isDevelopmentHost = config.SECRET.hosts.includes(host);
 
             // Choose DB URI based on environment
