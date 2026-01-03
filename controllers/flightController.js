@@ -27,7 +27,7 @@ class flightAPIDta {
         };
     }
 
-    // Flight Search Function
+    // 1. Flight Search Function
     async flightsearch(req) {
         try {
 
@@ -111,7 +111,7 @@ class flightAPIDta {
             const queryString = new URLSearchParams(searchParams).toString();
 
             // Successful respons
-            return ({ status: "success", flights: segments, TraceId, queryString });
+            return ({ status: "success", flights: segments, TraceId, queryString, FlightAvailabilityRQ: payload });
 
         } catch (error) {
             console.log('error: ', error);
@@ -119,7 +119,8 @@ class flightAPIDta {
             return ({ status: "error", message: error });
         }
     }
-    // Fare Rule Function
+
+    // 2. Fare Rule Function
     async fareRule(req) {
         try {
             // Extract required data
@@ -147,25 +148,34 @@ class flightAPIDta {
         }
     }
 
-    // RePrice Function
+    // 3. RePrice Function
     async rePrice(req) {
         try {
             // Extract required data
-            const { TraceId, ResultIndex } = req.body;
+            const { TraceId, ItineraryKey, FlightAvailabilityRQ } = req.body;
+            if (!TraceId || !ItineraryKey || !FlightAvailabilityRQ) {
+                return { status: "error", message: "TraceId / ItineraryKey / FlightAvailabilityRQ missing" };
+            }
 
             // Prepare payload
             const payload = {
-                TraceId,
-                ResultIndex,
-                Authentication: this.getEMTAuthentication(req)
+                TraceId: TraceId,
+                ItineraryKey: ItineraryKey,
+                FlightAvailabilityRQ: FlightAvailabilityRQ,
+                Authentication: {
+                    ...this.getEMTAuthentication(req),
+                    IpAddress: "127.0.0.1"
+                }
             };
+            console.log("RePrice Payload =>", payload);
 
             // API Call
-            const response = await axios.post(`${EMT.base_url}/RePrice`, payload, {
+            const response = await axios.post(`${EMT.base_url}/AirRePriceRQ`, payload, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
+            console.log('response.data: ', response.data);
 
             // Return fare
             return { status: "success", fare: response.data.Fare };
@@ -175,7 +185,7 @@ class flightAPIDta {
         }
     }
 
-    // Book Flight Function
+    // 4.Book Flight Function
     async bookFlight(req) {
         try {
             // Extract required data
@@ -204,7 +214,7 @@ class flightAPIDta {
         }
     }
 
-    // Ticket Issue Function
+    // 5. Ticket Issue Function
     async ticketIssue(req) {
         try {
             // Extract required data

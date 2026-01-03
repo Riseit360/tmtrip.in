@@ -1,70 +1,90 @@
-<% if (data && data.status === 'success' && data.flights.length > 0) { %>
-
-  <% data.flights.forEach(function(flight){ 
-      
-
-      const leg = flight.Bonds?.[0]?.Legs?.[0];
-
-      const airlineName = leg?.AirlineName || "Airline";
-      const airlineCode = leg?.AirlineCode || "";
-      const flightNo = leg?.FlightNumber || "";
+<%- include('../partials/header.ejs') %>
+  <%- include('../partials/topservice.ejs') %>
 
 
-      const departTime = leg?.DepTime || "--:--";
-      const arriveTime = leg?.ArrTime || "--:--";
 
+    <% if (data && data.status==='success' && data.flights && data.flights.length> 0) { %>
 
-      const duration = leg?.Duration || "Nonstop";
+      <div class="flight-list">
 
+        <% data.flights.forEach(function (flight) { const leg=flight?.Bonds?.[0]?.Legs?.[0] || {}; const
+          airlineName=leg.AirlineName || "Airline" ; const airlineCode=leg.AirlineCode || "XX" ; const
+          flightNo=leg.FlightNumber || "" ; const departTime=leg.DepTime || "--:--" ; const arriveTime=leg.ArrTime
+          || "--:--" ; const fromCity=leg.Origin || "DEL" ; const toCity=leg.Destination || "BOM" ; const
+          duration=leg.Duration || "Non-stop" ; const price=flight?.Fare?.PublishedFare || 0; const
+          traceId=data.TraceId; const itineraryKey=flight.ItineraryKey; %>
 
-      const fromCity = leg?.Origin || "DEL";
-      const toCity = leg?.Destination || "BOM";
+          <!-- FLIGHT CARD -->
+          <div class="flight-card">
 
-   
-      const price = flight.Fare?.PublishedFare || 0;
-  %>
+            <!-- AIRLINE -->
+            <div class="airline">
+              <div>
+                <strong>
+                  <%= airlineName %>
+                </strong>
+                <div class="flight-no">
+                  <%= airlineCode %>
+                    <%= flightNo %>
+                </div>
+              </div>
+            </div>
 
-  <!-- FLIGHT CARD -->
-  <div class="flight-card">
-    
-    <!-- LEFT: Airline -->
-    <div class="airline">
-      <img src="/images/airlines/<%= airlineCode %>.png" alt="<%= airlineName %>" />
-      <div>
-        <strong><%= airlineName %></strong>
-        <div class="flight-no"><%= airlineCode %>-<%= flightNo %></div>
+            <!-- TIMING -->
+            <div class="timing">
+              <div>
+                <strong>
+                  <%= departTime %>
+                </strong>
+                <small>
+                  <%= fromCity %>
+                </small>
+              </div>
+
+              <div class="duration">
+                <small>
+                  <%= duration %>
+                </small>
+                <span>Non-stop</span>
+              </div>
+
+              <div>
+                <strong>
+                  <%= arriveTime %>
+                </strong>
+                <small>
+                  <%= toCity %>
+                </small>
+              </div>
+            </div>
+
+            <input type="hidden" id="FlightAvailabilityRQ" value='<%- JSON.stringify(data.FlightAvailabilityRQ) %>'>
+
+            <!-- PRICE -->
+            <div class="price">
+              <div class="amount">₹ <%= price %>
+              </div>
+
+              <!-- ✅ ACTION BASED BUTTON -->
+              <button class="book-btn js-flight-action" data-action="BOOK_FLIGHT" data-traceid="<%= traceId %>"
+                data-itinerarykey="<%= itineraryKey %>"> BOOK NOW</button>
+
+              <small class="note">Limited seats</small>
+            </div>
+
+          </div>
+          <!-- END CARD -->
+
+          <% }); %>
+
       </div>
-    </div>
 
-    <!-- MIDDLE: TIME -->
-    <div class="timing">
-      <div>
-        <strong><%= departTime %></strong>
-        <small><%= fromCity %></small>
-      </div>
+      <% } else { %>
+        <p>No flights found</p>
+        <% } %>
 
-      <div class="duration">
-        <small><%= duration %></small>
-        <span>Non-stop</span>
-      </div>
 
-      <div>
-        <strong><%= arriveTime %></strong>
-        <small><%= toCity %></small>
-      </div>
-    </div>
 
-    <!-- RIGHT: PRICE -->
-    <div class="price">
-      <div class="amount">₹ <%= price %></div>
-      <button class="book-btn">BOOK NOW</button>
-      <small class="seats">Limited seats</small>
-    </div>
 
-  </div>
 
-  <% }) %>
-
-<% } else { %>
-  <p>No flights found</p>
-<% } %>
+          <%- include('../partials/footer.ejs') %>

@@ -11,7 +11,7 @@ const flightData = new flightAPIDta();
 
 
 
-// Flight Search Routes
+// 1. Flight Search Routes
 router.post('/flight-search', async (req, res) => {
     try {
         // Call flight search service
@@ -31,12 +31,13 @@ router.post('/flight-search', async (req, res) => {
     }
 })
 
-// Flight Search List Routes
+// 2. Flight Search List Routes
 router.get('/flight-search/listing', async (req, res) => {
     try {
         // Call flight search service
         const flightSearchResult = await flightData.flightsearch(req);
-
+        console.log('flightSearchResult: ', flightSearchResult);
+  
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
             title: "Dashboard",
@@ -48,7 +49,7 @@ router.get('/flight-search/listing', async (req, res) => {
     }
 })
 
-// Flight Fare Rule Routes
+// 3. Flight Fare Rule Routes
 router.post("/flight/fare-rule", async (req, res) => {
     try {
         // Call fare rule service
@@ -68,7 +69,7 @@ router.post("/flight/fare-rule", async (req, res) => {
     }
 });
 
-// Flight RePrice Routes
+// 4. Flight RePrice Routes
 router.post("/flight/reprice", async (req, res) => {
     try {
         // Call rePrice service
@@ -87,7 +88,7 @@ router.post("/flight/reprice", async (req, res) => {
     }
 });
 
-// Flight Book Routes
+// 5. Flight Book Routes
 router.post("/flight/book", async (req, res) => {
     try {
         // Call book flight service
@@ -107,7 +108,7 @@ router.post("/flight/book", async (req, res) => {
     }
 });
 
-// Flight Ticket Issue Routes
+// 6. Flight Ticket Issue Routes
 router.post("/flight/ticket", async (req, res) => {
     try {
         // Call ticket issue service
