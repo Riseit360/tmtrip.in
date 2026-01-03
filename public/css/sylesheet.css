@@ -2156,7 +2156,8 @@ span#select2-paymentSelect-container {
     overflow: hidden;
     background: #fffaf0;
     border: 1px solid #f0e6b8;
-    /* box-shadow: 0 8px 18px rgba(0, 0, 0, .08); */
+    box-shadow: 0 5px 15px rgb(173 173 173 / 16%);
+    margin-bottom: 15px;
 }
 
 /* Premium Accent Border */
