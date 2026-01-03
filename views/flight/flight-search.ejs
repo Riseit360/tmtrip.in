@@ -1,144 +1,128 @@
 <%- include('../partials/header.ejs') %>
   <%- include('../partials/topservice.ejs') %>
-
-
-
-    <% if (data && data.status==='success' && data.flights && data.flights.length> 0) { %>
-
-      <div class="flight-list">
-
-        <% data.flights.forEach(function (flight) { const leg=flight?.Bonds?.[0]?.Legs?.[0] || {}; const
-          airlineName=leg.AirlineName || "Airline" ; const airlineCode=leg.AirlineCode || "XX" ; const
-          flightNo=leg.FlightNumber || "" ; const departTime=leg.DepTime || "--:--" ; const arriveTime=leg.ArrTime
-          || "--:--" ; const fromCity=leg.Origin || "DEL" ; const toCity=leg.Destination || "BOM" ; const
-          duration=leg.Duration || "Non-stop" ; const price=flight?.Fare?.PublishedFare || 0; const
-          traceId=data.TraceId; const itineraryKey=flight.ItineraryKey; %>
-
-          <!-- FLIGHT CARD -->
-          <div class="flight-card">
-
-            <!-- AIRLINE -->
-            <div class="airline">
-              <div>
-                <strong>
-                  <%= airlineName %>
-                </strong>
-                <div class="flight-no">
-                  <%= airlineCode %>
-                    <%= flightNo %>
+    <div>
+      <!--banner slider-->
+      <div class="banner-slider">
+        <div class="slid-img">
+          <img src="/images/TRAVEL-LOAN-Back.png" alt="Celebrate Tradition with Elegance">
+        </div>
+        <div class="slider">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="slid-text">
+                  <h1>Celebrate <span>Tradition</span> with Elegance</h1>
+                  <p>Travel Loan </p>
+                  <p>Travel Credit Line up to ₹5,00,000</p>
+                  <p>Apply for your travel line of credit with TM Trip and experience seamless global
+                    travel
+                    finan</p>
+                  <a href="#" class="popupbtnsec">Apply Now </a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="slidertext-img">
+                  <img src="/images/airplane.png" alt="">
                 </div>
               </div>
             </div>
-
-            <!-- TIMING -->
-            <div class="timing">
-              <div>
-                <strong>
-                  <%= departTime %>
-                </strong>
-                <small>
-                  <%= fromCity %>
-                </small>
-              </div>
-
-              <div class="duration">
-                <small>
-                  <%= duration %>
-                </small>
-                <span>Non-stop</span>
-              </div>
-
-              <div>
-                <strong>
-                  <%= arriveTime %>
-                </strong>
-                <small>
-                  <%= toCity %>
-                </small>
-              </div>
-            </div>
-
-            <input type="hidden" id="FlightAvailabilityRQ" value='<%- JSON.stringify(data.FlightAvailabilityRQ) %>'>
-
-            <!-- PRICE -->
-            <div class="price">
-              <div class="amount">₹ <%= price %>
-              </div>
-
-              <!-- ✅ ACTION BASED BUTTON -->
-              <button class="book-btn js-flight-action" data-action="BOOK_FLIGHT" data-traceid="<%= traceId %>"
-                data-itinerarykey="<%= itineraryKey %>"> BOOK NOW</button>
-
-              <small class="note">Limited seats</small>
-            </div>
-
           </div>
-          <!-- END CARD -->
-
-          <% }); %>
-
+        </div>
       </div>
 
-      <% } else { %>
-        <p>No flights found</p>
-        <% } %>
+
+      <!-- Flight search list -->
+      <% if (data && data.status==='success' && data.flights && data.flights.length> 0) { %>
+        <div class="flight-search comonmarpad">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-8">
+                <% data.flights.forEach(function (flight) { const bond=flight?.Bonds?.[0] || {}; const
+                  leg=bond?.Legs?.[0] || {}; const paxFare=flight?.Fare?.PaxFares?.[0] || {}; const
+                  airlineName=leg.FlightName || "Airline" ; const airlineCode=leg.CarrierCode || "XX" ; const
+                  flightNo=leg.FlightNumber || "" ; const departTime=leg.DepartureTime || "--:--" ; const
+                  arriveTime=leg.ArrivalTime || "--:--" ; const fromCity=leg.Origin || "---" ; const
+                  toCity=leg.Destination || "---" ; const duration=leg.Duration || bond.JourneyTime || "--" ; const
+                  stops=leg.NumberOfStops==="0" ? "Non-stop" : leg.NumberOfStops + " Stops" ; const
+                  price=paxFare.TotalFare || flight?.Fare?.TotalFareWithOutMarkUp || 0; const traceId=data.TraceId;
+                  const itineraryKey=flight.ItineraryKey; %>
 
 
+                  <div class="col-md-12">
+                    <div class="flight-card premium">
+                      <div class="flight-main">
 
-          <!--Flight search list-->
-          <div class="flight-search comonmarpad">
-            <div class="container">
-              <div class="row">
+                        <!-- Airline -->
+                        <div class="airline">
+                          <img src="/images/<%= airlineCode %>.png" alt="<%= airlineName %>">
+                          <span class="code">
+                            <%= airlineCode %>-<%= flightNo %>
+                          </span>
+                        </div>
 
+                        <!-- Departure -->
+                        <div class="time-box">
+                          <h3>
+                            <%= departTime %>
+                          </h3>
+                          <span>
+                            <%= fromCity %>
+                          </span>
+                        </div>
 
-                <div class="col-md-4"></div>
-                <div class="col-md-8">
+                        <!-- Duration -->
+                        <div class="duration">
+                          <p>
+                            <%= duration %>
+                          </p>
+                          <small>
+                            <%= stops %>
+                          </small>
+                        </div>
 
+                        <!-- Arrival -->
+                        <div class="time-box">
+                          <h3>
+                            <%= arriveTime %>
+                          </h3>
+                          <span>
+                            <%= toCity %>
+                          </span>
+                        </div>
 
-                  <div class="flight-card premium">
-                    <div class="flight-main">
+                        <!-- Price -->
+                        <div class="price-section">
+                          <h3 class="price">₹<%= price %>
+                          </h3>
+                          <input type="radio" name="selectedFlight" data-traceid="<%= traceId %>"
+                            data-itinerary="<%= itineraryKey %>" checked>
+                        </div>
 
-                      <div class="airline">
-                        <img src="/images/SG.png" alt="SpiceJet">
-                        <span class="code">SG-105</span>
                       </div>
 
-                      <div class="time-box">
-                        <h3>21:20</h3>
-                        <span>Delhi</span>
+                      <div class="footer-link">
+                        <a href="#" class="flight-detail-btn" data-itinerary="<%= itineraryKey %>">
+                          Flight Detail
+                        </a>
                       </div>
-
-                      <div class="duration">
-                        <p>02h 25m</p>
-                        <small>Non-stop</small>
-                      </div>
-
-                      <div class="time-box">
-                        <h3>23:45</h3>
-                        <span>Mumbai</span>
-                      </div>
-
-                      <div class="price-section">
-                        <h3 class="price">₹9,496</h3>
-                        <input type="radio" checked>
-                      </div>
-                    </div>
-
-                    <div class="footer-link">
-                      <a href="#">Flight Detail</a>
                     </div>
                   </div>
 
 
-
-
-                </div>
-
+                  <% }); %>
 
               </div>
             </div>
           </div>
+        </div>
+        <% } else { %>
+          <p>No flights found</p>
+          <% } %>
+
+
+    </div>
 
 
 
-          <%- include('../partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
