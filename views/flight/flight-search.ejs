@@ -1,70 +1,129 @@
-<% if (data && data.status === 'success' && data.flights.length > 0) { %>
-
-  <% data.flights.forEach(function(flight){ 
-      
-
-      const leg = flight.Bonds?.[0]?.Legs?.[0];
-
-      const airlineName = leg?.AirlineName || "Airline";
-      const airlineCode = leg?.AirlineCode || "";
-      const flightNo = leg?.FlightNumber || "";
+<%- include('../partials/header.ejs') %>
+  <%- include('../partials/topservice.ejs') %>
 
 
-      const departTime = leg?.DepTime || "--:--";
-      const arriveTime = leg?.ArrTime || "--:--";
+    <% if (data && data.status==='success' && data.flights.length> 0) { %>
+
+      <% data.flights.forEach(function(flight){ const leg=flight.Bonds?.[0]?.Legs?.[0]; const
+        airlineName=leg?.AirlineName || "Airline" ; const airlineCode=leg?.AirlineCode || "" ; const
+        flightNo=leg?.FlightNumber || "" ; const departTime=leg?.DepTime || "--:--" ; const arriveTime=leg?.ArrTime
+        || "--:--" ; const duration=leg?.Duration || "Nonstop" ; const fromCity=leg?.Origin || "DEL" ; const
+        toCity=leg?.Destination || "BOM" ; const price=flight.Fare?.PublishedFare || 0; %>
+
+        <!-- FLIGHT CARD -->
+        <div class="flight-card">
+
+          <!-- LEFT: Airline -->
+          <div class="airline">
+            <img src="/images/airlines/<%= airlineCode %>.png" alt="<%= airlineName %>" />
+            <div>
+              <strong>
+                <%= airlineName %>
+              </strong>
+              <div class="flight-no">
+                <%= airlineCode %>-<%= flightNo %>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDDLE: TIME -->
+          <div class="timing">
+            <div>
+              <strong>
+                <%= departTime %>
+              </strong>
+              <small>
+                <%= fromCity %>
+              </small>
+            </div>
+
+            <div class="duration">
+              <small>
+                <%= duration %>
+              </small>
+              <span>Non-stop</span>
+            </div>
+
+            <div>
+              <strong>
+                <%= arriveTime %>
+              </strong>
+              <small>
+                <%= toCity %>
+              </small>
+            </div>
+          </div>
+
+          <!-- RIGHT: PRICE -->
+          <div class="price">
+            <div class="amount">₹ <%= price %>
+            </div>
+            <button class="book-btn">BOOK NOW</button>
+            <small class="seats">Limited seats</small>
+          </div>
+
+        </div>
+
+        <% }) %>
+
+          <% } else { %>
+            <p>No flights found</p>
+            <% } %>
+
+              <!--Flight search list-->
+              <div class="flight-search comonmarpad">
+                <div class="container">
+                  <div class="row">
 
 
-      const duration = leg?.Duration || "Nonstop";
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
 
 
-      const fromCity = leg?.Origin || "DEL";
-      const toCity = leg?.Destination || "BOM";
+                      <div class="flight-card premium">
+                        <div class="flight-main">
 
-   
-      const price = flight.Fare?.PublishedFare || 0;
-  %>
+                          <div class="airline">
+                            <img src="/images/SG.png" alt="SpiceJet">
+                            <span class="code">SG-105</span>
+                          </div>
 
-  <!-- FLIGHT CARD -->
-  <div class="flight-card">
-    
-    <!-- LEFT: Airline -->
-    <div class="airline">
-      <img src="/images/airlines/<%= airlineCode %>.png" alt="<%= airlineName %>" />
-      <div>
-        <strong><%= airlineName %></strong>
-        <div class="flight-no"><%= airlineCode %>-<%= flightNo %></div>
-      </div>
-    </div>
+                          <div class="time-box">
+                            <h3>21:20</h3>
+                            <span>Delhi</span>
+                          </div>
 
-    <!-- MIDDLE: TIME -->
-    <div class="timing">
-      <div>
-        <strong><%= departTime %></strong>
-        <small><%= fromCity %></small>
-      </div>
+                          <div class="duration">
+                            <p>02h 25m</p>
+                            <small>Non-stop</small>
+                          </div>
 
-      <div class="duration">
-        <small><%= duration %></small>
-        <span>Non-stop</span>
-      </div>
+                          <div class="time-box">
+                            <h3>23:45</h3>
+                            <span>Mumbai</span>
+                          </div>
 
-      <div>
-        <strong><%= arriveTime %></strong>
-        <small><%= toCity %></small>
-      </div>
-    </div>
+                          <div class="price-section">
+                            <h3 class="price">₹9,496</h3>
+                            <input type="radio" checked>
+                          </div>
+                        </div>
 
-    <!-- RIGHT: PRICE -->
-    <div class="price">
-      <div class="amount">₹ <%= price %></div>
-      <button class="book-btn">BOOK NOW</button>
-      <small class="seats">Limited seats</small>
-    </div>
+                        <div class="footer-link">
+                          <a href="#">Flight Detail</a>
+                        </div>
+                      </div>
 
-  </div>
 
-  <% }) %>
 
-<% } else { %>
-  <p>No flights found</p>
-<% } %>
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <%- include('../partials/footer.ejs') %>
