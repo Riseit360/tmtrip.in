@@ -11,7 +11,7 @@ const flightData = new flightAPIDta();
 
 
 
-// Flight Routes
+// Flight Search Routes
 router.post('/flight-search', async (req, res) => {
     try {
         // Call flight search service
@@ -31,11 +31,11 @@ router.post('/flight-search', async (req, res) => {
     }
 })
 
-// Flight Pages
+// Flight Search List Routes
 router.get('/flight-search/listing', async (req, res) => {
     try {
         // Call flight search service
-        const flightSearchResult = await flightData.flightsearch(req, res);
+        const flightSearchResult = await flightData.flightsearch(req);
 
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
@@ -47,6 +47,85 @@ router.get('/flight-search/listing', async (req, res) => {
         res.status(404).render("pages/404error");
     }
 })
+
+// Flight Fare Rule Routes
+router.post("/flight/fare-rule", async (req, res) => {
+    try {
+        // Call fare rule service
+        const fareRuleResult = await flightData.fareRule(req);
+
+        // Safety check
+        if (fareRuleResult.status !== "success") {
+            return res.status(400).json(fareRuleResult);
+        }
+
+        // Pages Direcdtory
+        return res.status(200).json(fareRuleResult);
+
+    } catch (error) {
+        console.error("Fare Rule Error:", error);
+        return res.status(404).render("pages/404error");
+    }
+});
+
+// Flight RePrice Routes
+router.post("/flight/reprice", async (req, res) => {
+    try {
+        // Call rePrice service
+        const rePriceResult = await flightData.rePrice(req);
+
+        // Safety check
+        if (rePriceResult.status !== "success") {
+            return res.status(400).json(rePriceResult);
+        }
+
+        // Pages Direcdtory
+        return res.status(200).json(rePriceResult);
+    } catch (error) {
+        console.error("RePrice Error:", error);
+        return res.status(404).render("pages/404error");
+    }
+});
+
+// Flight Book Routes
+router.post("/flight/book", async (req, res) => {
+    try {
+        // Call book flight service
+        const bookingResult = await flightData.bookFlight(req);
+
+        // Safety check
+        if (bookingResult.status !== "success") {
+            return res.status(400).json(bookingResult);
+        }
+
+        // Pages Direcdtory
+        return res.status(200).json(bookingResult);
+
+    } catch (error) {
+        console.error("Booking Error:", error);
+        return res.status(404).render("pages/404error");
+    }
+});
+
+// Flight Ticket Issue Routes
+router.post("/flight/ticket", async (req, res) => {
+    try {
+        // Call ticket issue service
+        const ticketResult = await flightData.ticketIssue(req);
+
+        // Safety check
+        if (ticketResult.status !== "success") {
+            return res.status(400).json(ticketResult);
+        }
+
+        // Pages Direcdtory
+        return res.status(200).json(ticketResult);
+
+    } catch (error) {
+        console.error("Ticket Issue Error:", error);
+        return res.status(404).render("pages/404error");
+    }
+});
 
 // From Data 
 router.post('/get-a-quate', async (req, res) => {
@@ -63,7 +142,7 @@ router.post('/get-a-quate', async (req, res) => {
 
         // Pages Direcdtory
         return res.status(200).render("email/thanks_me.ejs", {
-          title: "Thank You",
+            title: "Thank You",
             data: profileData
         });
 
