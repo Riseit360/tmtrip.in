@@ -22,6 +22,7 @@ const transporter = nodemailer.createTransport({
 class EmailSent {
     // 1️⃣ Send email to Admin
     async sendemailtous(formData) { 
+        console.log('formData: ', formData);
         try {
             const html = await ejs.renderFile("./views/email/thanks_me.ejs", { data: formData });
             const mailOptions = {

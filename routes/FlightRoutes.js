@@ -137,9 +137,7 @@ router.post("/flight/ticket", async (req, res) => {
 router.post('/get-a-quate', async (req, res) => {
     try {
         // Call flight search service
-        const getAQuateResult = await flightData.getAQuate(req, res);
-        const profileData = getAQuateResult.data.personal_details;
-        console.log('profileData: ', profileData);
+        const getAQuateResult = await flightData.getAQuate(req, res); 
 
         // Safety check
         if (!getAQuateResult || getAQuateResult.status !== 'success') {
@@ -147,9 +145,8 @@ router.post('/get-a-quate', async (req, res) => {
         }
 
         // Pages Direcdtory
-        return res.status(200).render("email/thanks_me.ejs", {
-            title: "Thank You",
-            data: profileData
+        return res.status(200).render("email/thankyou.ejs", {
+            title: "Thank You"
         });
 
     } catch (error) {

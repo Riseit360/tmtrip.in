@@ -241,9 +241,6 @@ class flightAPIDta {
         }
     }
 
-
-
-
     // Form Data Function
     async getAQuate(req, res) {
         try {
