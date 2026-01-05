@@ -36,12 +36,6 @@ router.get('/flight-search/listing', async (req, res) => {
     try {
         // Call flight search service
         const flightSearchResult = await flightData.flightsearch(req);
-        console.log('flightSearchResult: ', flightSearchResult.flights[0]);
-        console.log('Legs: ', flightSearchResult.flights[0].Bonds[0].Legs);
-        console.log('Fare: ', flightSearchResult.flights[0].Fare.PaxFares);
-   
-        
-
 
         // Pages Direcdtory
         return res.status(200).render("flight/flight-search.ejs", {
