@@ -171,7 +171,8 @@
 
     .slid-text h1 {
         font-size: 40px;
-        margin-bottom: 0px;
+        margin-bottom: 10px;
+        line-height: 50px;
     }
 
     .slid-text h2 {
@@ -206,7 +207,7 @@
     }
 
     .slider {
-        padding: 50px 0px 0px;
+        padding: 60px 0px 0px;
         position: relative !important;
     }
 
@@ -1112,7 +1113,7 @@
     }
 
     .topserv+.banner-slider>.slider {
-        padding: 150px 0px 0px;
+        padding: 20px 0px 0px;
     }
 
     div#Chartresldata {
@@ -1133,104 +1134,110 @@
 
 /* ========== Responsive: Responsive: for contactus (768px - 1024px) ========== */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .contactform-container {
-    max-width: 720px;
-    padding: 60px 16px 24px;
-    margin: 16px auto;
-  }
+    .contactform-container {
+        max-width: 720px;
+        padding: 60px 16px 24px;
+        margin: 16px auto;
+    }
 
-  .contactform-title { 
-    font-size: 20px;
-    margin-bottom: 18px;
-  }
+    .contactform-title {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
 
-  .contactform {
-    gap: 16px;
-  }
+    .contactform {
+        gap: 16px;
+    }
 
-  .contactlabel {
-    font-size: 15px;
-  }
+    .contactlabel {
+        font-size: 15px;
+    }
 
-  .contactinput,
-  .contacttextarea {
-    font-size: 15px;
-    padding: 12px;
-    border-radius: 6px;
-  }
+    .contactinput,
+    .contacttextarea {
+        font-size: 15px;
+        padding: 12px;
+        border-radius: 6px;
+    }
 
-  .contacttextarea {
-    min-height: 110px;
-  }
+    .contacttextarea {
+        min-height: 110px;
+    }
 
-  .contactbtn {
-    font-size: 15px;
-    padding: 12px 14px;
-    align-self: flex-end;
-    min-width: 140px;
-  }
+    .contactbtn {
+        font-size: 15px;
+        padding: 12px 14px;
+        align-self: flex-end;
+        min-width: 140px;
+    }
 }
 
 /* ========== Responsive: for contactus (<=767px) ========== */
 @media (max-width: 767px) {
-  .contactform-container {
-    width: 100%;
-    
-    margin: 0px auto;
-    padding: 28px 16px;
-    box-sizing: border-box;
-  }
+    .contactform-container {
+        width: 100%;
 
-  .contactform-title {
-    font-size: 18px;
-    margin-bottom: 14px;
-    margin-top: 95px;
-  }
+        margin: 0px auto;
+        padding: 28px 16px;
+        box-sizing: border-box;
+    }
 
-  .contactform {
-    gap: 14px;
-  }
+    .contactform-title {
+        font-size: 18px;
+        margin-bottom: 14px;
+        margin-top: 95px;
+    }
 
-  .contactgroup {
-    gap: 6px;
-  }
+    .contactform {
+        gap: 14px;
+    }
 
-  .contactlabel {
-    font-size: 14px;
-  }
+    .contactgroup {
+        gap: 6px;
+    }
 
-  .contactinput,
-  .contacttextarea {
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 6px;
-  }
+    .contactlabel {
+        font-size: 14px;
+    }
 
-  .contacttextarea {
-    min-height: 100px;
-  }
+    .contactinput,
+    .contacttextarea {
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 6px;
+    }
 
-  .contact-invalid-msg {
-    font-size: 12px;
-  }
+    .contacttextarea {
+        min-height: 100px;
+    }
 
-  .contact-success,
-  .contact-error {
-    font-size: 13px;
-    padding: 10px;
-  }
+    .contact-invalid-msg {
+        font-size: 12px;
+    }
 
-  /* Make submit button full-width for easier tapping */
-  .contactbtn {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-    border-radius: 8px;
-    align-self: stretch;
-  }
-   .banner-slider {
-    padding-top: 82px;
-}
+    .contact-success,
+    .contact-error {
+        font-size: 13px;
+        padding: 10px;
+    }
 
+    /* Make submit button full-width for easier tapping */
+    .contactbtn {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+        border-radius: 8px;
+        align-self: stretch;
+    }
+
+    .banner-slider {
+        padding-top: 130px;
+    }
+
+    .flightsearchsec {
+        padding-top: 150px;
+    }.slider {
+        padding: 20px 0px 0px;
+    }
 
 }
