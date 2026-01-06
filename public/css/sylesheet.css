@@ -2269,3 +2269,74 @@ span#select2-paymentSelect-container {
     transition: .25s ease;
     box-shadow: 0 12px 22px rgba(0, 0, 0, .12);
 }
+
+/*--flight-filter--*/
+.flight-filter {
+    width: 100%;
+    position: relative;
+    border: 1px solid #e9e9e9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #f3f3f3;
+    margin: 0px;
+    padding: 0px;
+}
+
+.flight-filter h3 {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px;
+}
+
+.flight-filter h3 span {
+    color: #1a73e8;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.filter-box {
+    margin: 0px;
+    padding: 10px 20px;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.filter-box h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.filter-box ul {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: block;
+}
+
+.filter-box ul li {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.filter-box ul li span {
+    display: flex;
+}
+
+.filter-box ul li span .form-check {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin: 0px 0px 8px;
+}
+
+.filter-box ul li span .form-check-input {
+    font-size: 13px;
+}
+
+.filter-box:last-child {
+    border-bottom: unset;
+}

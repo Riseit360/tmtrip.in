@@ -36,7 +36,156 @@
         <div class="flight-search comonmarpad">
           <div class="container">
             <div class="row">
-              <div class="col-md-4"></div>
+
+              <div class="col-md-4">
+
+                <div class="flight-filter">
+                  <h3>Filters <span>Reset</span></h3>
+                  <div class="filter-box">
+                    <h4>Popular Filters</h4>
+                    <ul>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="non-stop">
+                            <label>Non-stop</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="morning-departurep">
+                            <label>Morning Departure</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="indigo">
+                            <label>IndiGo</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="air-india">
+                            <label>Air India</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="air-india-express">
+                            <label>Air India Express</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="akasaair">
+                            <label>AkasaAir</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="spicejet">
+                            <label>SpiceJet</label>
+                          </div>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="filter-box">
+                    <h4>Stops</h4>
+                    <ul>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="non-stop">
+                            <label>Non-stop</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="stop">
+                            <label>1 stop</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="stop">
+                            <label>2+ stop</label>
+                          </div>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="filter-box">
+                    <h4>Airlines</h4>
+                    <ul>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="indigo">
+                            <label>IndiGo</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="air-india">
+                            <label>Air India</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="air-india-express">
+                            <label>Air India Express</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="akasaair">
+                            <label>AkasaAir</label>
+                          </div>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="spicejet">
+                            <label>SpiceJet</label>
+                          </div>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+
+
               <div class="col-md-8">
                 <% data.flights.forEach(function (flight) { const bond=flight?.Bonds?.[0] || {}; const
                   leg=bond?.Legs?.[0] || {}; const paxFare=flight?.Fare?.PaxFares?.[0] || {}; const
