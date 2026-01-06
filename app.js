@@ -78,6 +78,9 @@ app.use((req, res) => {
     res.status(404).render("pages/404error");
 });
 
+
+
+// Start Server after DB Connection
 dbConnection.connect().then(() => {
     // Server Start
     const server = http.createServer(app);
