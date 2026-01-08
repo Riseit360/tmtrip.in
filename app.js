@@ -55,7 +55,7 @@ app.use(
 );
 
 
-// Static Files
+// Static Files..
 app.use(express.static(path.join(__dirname, "public")));
 
 
