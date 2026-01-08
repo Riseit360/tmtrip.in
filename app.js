@@ -57,7 +57,7 @@ app.use(
 
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));
-
+  
 
 // Global Template Variables
 app.use((req, res, next) => {
