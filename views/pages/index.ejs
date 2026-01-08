@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <!--Services-->
+    <!--Services-->  
     <div class="services comonmarpad">
         <div class="container">
             <div class="row">
@@ -82,6 +82,434 @@
             </div>
         </div>
     </div>
+
+
+       <!--Search Cheap Flights-->
+    <div class="flightsearchsec comonmarpad">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Search Cheap Flights</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flightsect-form">
+
+                        <div class="tab-container">
+                            <div class="tab-menu">
+                                <ul>
+                                    <li><a href="#Roundtrip" class="taclarsec active" data-id="roundtrip">Roundtrip</a>
+                                    </li>
+                                    <li><a href="#one-way" class="taclarsec" data-id="one-way">One-way</a></li>
+                                    <li><a href="#multi-city" class="taclarsec" data-id="multi-city">Multi-city</a></li>
+                                </ul>
+                            </div>
+
+                            <!-- Tab-menu Roundtrip -->
+                            <div class="shomabodi active" data-id="roundtrip">
+                                <form method="post" action="/flight-search">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" id="fromInput" class="form-control"
+                                                    placeholder="Leaving from" name="From">
+                                            </div>
+                                            <span class="flexpoabsbor" id="swapBtn">
+                                                <i class="fa-solid fa-right-left"></i>
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" id="toInput" class="form-control"
+                                                    placeholder="Going to" name="To">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control" name="date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class" name="travelers">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Tab-menu One-way -->
+                            <div class="shomabodi " data-id="one-way">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Leaving from">
+                                            </div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Going to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Tab menu Multi-city -->
+                            <div class="shomabodi " data-id="multi-city">
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Leaving from">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-location-dot"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Going to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-calendar"></i></span>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-icon">
+                                                <span><i class="fa-solid fa-user"></i></span>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Travelers, Cabin Class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <div class="topservices comonmarpad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Top Trending Destinations</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="itemboxse">
+                                <span><img src="/images/Europe.png" alt=""></span>
+                                <h6>Europe</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="itemboxse">
+                                <span><img src="/images/kerala.png" alt=""></span>
+                                <h6>Kerala</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="itemboxse">
+                                <span><img src="/images/Bali.png" alt=""></span>
+                                <h6>Bali</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="itemboxse">
+                                <span><img src="/images/Vietnam.png" alt=""></span>
+                                <h6>Vietnam</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Features & Benefits -->
+            <div class="services comonmarpad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="features-head">
+                                <h2>Features & Benefits</h2>
+                                <p> Book your travel using TMTriptravel credit line on best brands in India like –
+                                    TMTrip and Goibibo </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Item 1: No Upfront Payments -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/no-upfront-payments.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>Zero Upfront Payments</h3>
+                                    <p>Make bookings without paying anything in advance.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Affordable Interest Rates -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/affordable-interest-rates.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>Affordable Interest Rates</h3>
+                                    <p>Enjoy interest rates starting as low as 0.74% per month.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Flexible EMI Tenures -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/flexible-emi-tenures.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>Flexible EMI Options</h3>
+                                    <p>Select repayment tenure between 1 to 12 months, based on your convenience.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Lifetime validity -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/lifetime-validity.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>Lifetime Validity</h3>
+                                    <p>Maintain good repayment behaviour to retain your credit limit for life. </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5: Credit for Urgent Travel Needs -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/credit-for-urgent-travel-needs.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>Credit for Urgent Travel Needs</h3>
+                                    <p>Borrow amounts from ₹2,000 to ₹1,00,000, based on your travel requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 6: No Usage, No Interest -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="flex items-start">
+                                <span><img src="/images/no-usage-no-interest.png" alt=""></span>
+                                <div class="textarea">
+                                    <h3>No Usage, No Interest</h3>
+                                    <p>Interest is charged only on the amount you utilize.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eligibility  -->
+            <div class="eligcriloatrav comonmarpad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="features-head">
+                                <h2>Travel Loan Eligibility Criteria</h2>
+                                <p> Wondering what’s needed to apply for a travel loan? Check your travel loan
+                                    eligibility
+                                    before applying to ensure a smooth and hassle-free process. Get all the details
+                                    upfront and
+                                    make your loan application seamless and quick! </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_1.png" alt=""></span>
+                                <p>Applicant must be salaried with Minimum Salary of <b class="coloran">Rs. 35,000</b>
+                                    per month</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_2.png" alt=""></span>
+                                <p>Maximum FOIR (Fixed Obligation to Income Ratio) <b class="coloran">- 70%</b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_3.png" alt=""></span>
+                                <p>Age <b class="coloran">- 22 to 58</b> Yrs & <b class="coloran">Resident Indian
+                                        National</b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_4.png" alt=""></span>
+                                <p> 1 Year Work-ex (<b class="coloran">4 months</b> with current company)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_5.png" alt=""></span>
+                                <p>Minimum credit score of <b class="coloran">700 or higher.</b></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg">
+                            <div class="sevbosic">
+                                <span><img src="/images/icon_log_6.png" alt=""></span>
+                                <p>Available only at <b class="coloran">selected locations</b> in India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  EMI calculator -->
+            <div class="emilcalculaterses comonmarpad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-8">
+                            <!-- EMI calculator -->
+                            <div class="emicalseardes">
+                                <h4>EMI Calculator</h4>
+                                <div class="form-group">
+                                    <label>Select Loan Amount</label>
+                                    <div class="inputicorsare">
+                                        <span>₹</span>
+                                        <input type="number" class="form-control" id="loanamount" name="loanamount"
+                                            placeholder="20,00,000" value="2000000">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tenure <span>
+                                            <input type="number" class="frombox" id="monthsValue" name="months"
+                                                value="60" min="10" max="300"> months
+                                        </span>
+                                    </label>
+                                    <input class="range-bar" id="monthsRange" type="range" min="10" max="300" value="60"
+                                        step="1" style="--webkitProgress: 18.463768%;">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Interest rate <span>
+                                            <input type="number" class="frombox" id="interestValue" name="Interestrate"
+                                                value="12" min="2" max="16">%
+                                        </span>
+                                    </label>
+                                    <input class="range-bar" id="interestRange" type="range" min="2" max="16"
+                                        step="0.05" value="12" style="--webkitProgress: 71.285714%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <!-- Emi  Calc -->
+                            <div class="calemidat emicalseardes">
+                                <h4>Report</h4>
+                                <h5>EMI Payable<b>₹<span id="emiAmount">68,355</span></b></h5>
+                                <h5>Total Interest<b>₹<span id="totalInterest">4,60,789</span></b></h5>
+                                <h5>Total amount <b>₹<span id="totalPayableAmount">24,60,789</span></b></h5>
+                                <h4 class="chartsecare">Payment Breakup </h4>
+                                <div id="Chartresldata"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Apply for instant approval!-->
+            <div class="instant-approval comonmarpad">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="approval-head">
+                                <h2>Apply for Instant Approval</h2>
+                                <p>Follow these 3 simple steps to check your eligibility:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="approval-steps">
+                                <div class="step-box">
+                                    <span>1</span>
+                                    <div class="stepbox-text">
+                                        <h3>Get Approved Limit</h3>
+                                        <p>Provide accurate information to receive your approved credit limit.</p>
+                                    </div>
+                                </div>
+                                <div class="step-box">
+                                    <span>2</span>
+                                    <div class="stepbox-text">
+                                        <h3>Complete Digital KYC</h3>
+                                        <p>Accept the offer and verify your identity digitally within 2 minutes.</p>
+                                    </div>
+                                </div>
+                                <div class="step-box">
+                                    <span>3</span>
+                                    <div class="stepbox-text">
+                                        <h3>Set Up Auto Repayment</h3>
+                                        <p>Submit your bank details for automated EMI deductions. Your account will be
+                                            charged
+                                            only when the travel credit line is used for bookings made on TMTrip or
+                                            Goibi
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="approval-img">
+                                <img src="/images/instant-approval.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 </div>
 
 
