@@ -48,6 +48,11 @@ exports.contactus = safeHandler((req, res) => {
     return renderPage(res, "contactus", "Contact Us");
 });
 
+exports.login = safeHandler((req, res) => {
+    return renderPage(res, "login", "Login");
+});
+
+
 exports.termCondition = safeHandler((req, res) => {
     return renderPage(res, "tmtrip-term-condition", "TMTrip — Terms & Conditions");
 });

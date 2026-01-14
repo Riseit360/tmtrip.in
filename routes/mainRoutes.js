@@ -10,6 +10,7 @@ const {
     holidaypackages,
     comingsoon,
     contactus, 
+    login,
     termCondition,
     privacyPolicy,
 } = require("../controllers/mainController");
@@ -25,6 +26,7 @@ router.get("/contactus", contactus);
 router.get("/tmtrip-term-condition", termCondition);
 router.get("/tmtrip-privacy-policy", privacyPolicy);
 router.get("/comingsoon", comingsoon);
+router.get("/login", login);
 
 
 
