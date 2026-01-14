@@ -18,27 +18,8 @@
 <script src="/js/main.js"></script>
 <script src="/js/api.js"></script> 
 
- <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("holidayPopup");
-    const openBtns = document.querySelectorAll(".popupbtnsec");
-    const closeBtn = document.querySelector(".close-btn");
 
-    // Auto popup after 5 seconds
-    setTimeout(() => popup.classList.add("model-open"), 5000);
 
-    // Open popup on button click
-    openBtns.forEach(btn => {
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            popup.classList.add("model-open");
-        });
-    });
-
-    // Close popup
-    closeBtn.addEventListener("click", () => popup.classList.remove("model-open"));
-});
-</script>
 
 
 </body>
